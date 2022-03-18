@@ -15,6 +15,22 @@ import { StoreModule } from '@ngrx/store';
 import { environment } from '../environments/environment';
 import { reducers, metaReducers } from './state/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
+import { HttpLink } from 'apollo-angular/http';
+import { DefaultOptions, InMemoryCache } from '@apollo/client/core';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthInterceptorProvider } from './auth/auth.interceptor';
+
+const defaultOptions: DefaultOptions = {
+  watchQuery: {
+    fetchPolicy: 'no-cache',
+    errorPolicy: 'ignore',
+  },
+  query: {
+    fetchPolicy: 'no-cache',
+    errorPolicy: 'all',
+  },
+};
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,12 +41,30 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     BrowserAnimationsModule,
     TuiDialogModule,
     TuiNotificationsModule,
+    ApolloModule,
+    HttpClientModule,
     StoreModule.forRoot(reducers, {
       metaReducers,
     }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
-  providers: [{ provide: TUI_SANITIZER, useClass: NgDompurifySanitizer }],
+  providers: [
+    AuthInterceptorProvider,
+    { provide: TUI_SANITIZER, useClass: NgDompurifySanitizer },
+    {
+      provide: APOLLO_OPTIONS,
+      useFactory: (httpLink: HttpLink) => {
+        return {
+          cache: new InMemoryCache({}),
+          link: httpLink.create({
+            uri: 'https://api.github.com/graphql',
+          }),
+          defaultOptions,
+        };
+      },
+      deps: [HttpLink],
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
