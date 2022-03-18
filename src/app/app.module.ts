@@ -11,6 +11,10 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { StoreModule } from '@ngrx/store';
+import { environment } from '../environments/environment';
+import { reducers, metaReducers } from './state/reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +25,10 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     TuiDialogModule,
     TuiNotificationsModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+    }),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
   providers: [{ provide: TUI_SANITIZER, useClass: NgDompurifySanitizer }],
   bootstrap: [AppComponent],
