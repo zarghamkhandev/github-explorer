@@ -60,6 +60,22 @@
   }
 }
 
+.footer-text {
+  font: var(--tui-font-text-l);
+  color: var(--tui-base-06);
+  margin: 0px 20px;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--tui-link-hover);
+  }
+}
+
+.footer-text.disabled {
+  color: var(--tui-base-04);
+  pointer-events: none;
+}
+
 @media (max-width: 740px) {
   .card {
     width: calc(100% - 20px);

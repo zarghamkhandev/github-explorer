@@ -15,19 +15,37 @@
   {{ error }}
 </tui-notification>
 
-<div class="cards-container">
-  <ngx-repo-card
-    class="card"
-    *ngFor="let repo of repos$ | async"
-    [title]="repo.name"
-    [description]="repo.description"
-    [stargazerCount]="repo.stargazerCount"
-    [language]="repo.languages?.nodes?.[0] ?? null"
-    [licenseInfo]="repo.licenseInfo"
-  ></ngx-repo-card>
-</div>
+<tui-loader
+  [showLoader]="(loading$ | async) ?? false"
+  [overlay]="true"
+  [inheritColor]="false"
+>
+  <div class="cards-container">
+    <ngx-repo-card
+      class="card"
+      *ngFor="let repo of repos$ | async"
+      [title]="repo.name"
+      [description]="repo.description"
+      [stargazerCount]="repo.stargazerCount"
+      [language]="repo.languages?.nodes?.[0] ?? null"
+      [licenseInfo]="repo.licenseInfo"
+    ></ngx-repo-card>
+  </div>
 
-<div class="footer-block" *ngIf="pageInfo$ | async as pageInfo">
-  <tui-svg src="tuiIconChevronLeft" class="footer-icon"></tui-svg>
-  <tui-svg src="tuiIconChevronRight" class="footer-icon"></tui-svg>
-</div>
+  <div class="footer-block" *ngIf="pageInfo$ | async as pageInfo">
+    <p
+      class="footer-text"
+      (click)="prev(pageInfo.startCursor)"
+      [ngClass]="{ disabled: !pageInfo.hasPreviousPage }"
+    >
+      Prev
+    </p>
+    <p
+      class="footer-text"
+      (click)="next(pageInfo.endCursor)"
+      [ngClass]="{ disabled: !pageInfo.hasNextPage }"
+    >
+      Next
+    </p>
+  </div>
+</tui-loader>

@@ -7,6 +7,11 @@ export const selectReposState = (state: GlobalState) => state.repos;
 
 export const error = createSelector(selectReposState, (state) => state.error);
 
+export const loading = createSelector(
+  selectReposState,
+  (state) => state.loading
+);
+
 export const repos = createSelector(selectReposState, fromRepos.selectAllRepos);
 
 export const pageInfo = createSelector(

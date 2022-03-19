@@ -5,14 +5,24 @@ import { RepoQuery } from '@types';
 @Injectable({
   providedIn: 'root',
 })
-export class reposGQL extends Query<RepoQuery, { after: string | null }> {
+export class reposGQL extends Query<
+  RepoQuery,
+  {
+    after: string | null;
+    before: string | null;
+    first: number | null;
+    last: number | null;
+  }
+> {
   override document = gql`
-    query GetRepos($after: String) {
+    query GetRepos($after: String, $before: String, $first: Int, $last: Int) {
       search(
         query: "stars:>1 is:public"
         type: REPOSITORY
-        first: 6
+        first: $first
         after: $after
+        last: $last
+        before: $before
       ) {
         pageInfo {
           startCursor

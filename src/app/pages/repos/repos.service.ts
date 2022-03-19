@@ -7,14 +7,21 @@ import { PageInfo, Repo } from '@types';
 export class ReposService {
   constructor(private reposGQL: reposGQL) {}
 
-  getAll(): Observable<{
+  getAll(
+    cursor: string | null,
+    direction: 1 | -1
+  ): Observable<{
     repos: Repo[];
     pageInfo: PageInfo;
   }> {
-    return this.reposGQL.fetch({ after: null }).pipe(
+    const after = direction === 1 ? cursor : null;
+    const first = direction === 1 ? 6 : null;
+    const before = direction === -1 ? cursor : null;
+    const last = direction === -1 ? 6 : null;
+
+    return this.reposGQL.fetch({ after, before, first, last }).pipe(
       map((res) => {
         const { nodes: repos, pageInfo } = res?.data?.search;
-
         return {
           repos,
           pageInfo,

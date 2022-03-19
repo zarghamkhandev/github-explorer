@@ -4,17 +4,20 @@ import { PageInfo, Repo } from '@types';
 import { RepoActions } from '../actions';
 
 export interface State extends EntityState<Repo> {
+  loading: boolean;
   error: null | string;
-  pageCount: null | number;
   pageInfo: null | PageInfo;
 }
 
 export const adapter: EntityAdapter<Repo> = createEntityAdapter<Repo>();
 
 export const reducer = createReducer<State>(
-  adapter.getInitialState({ error: null, pageCount: null, pageInfo: null }),
+  adapter.getInitialState({ error: null, pageInfo: null, loading: true }),
   on(RepoActions.setAll, (state, { repos }) => {
     return adapter.setAll(repos, state);
+  }),
+  on(RepoActions.setLoading, (state, { loading }) => {
+    return { ...state, loading };
   }),
   on(RepoActions.setError, (state, { error }) => {
     return { ...state, error };
