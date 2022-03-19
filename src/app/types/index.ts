@@ -19,12 +19,8 @@ interface Search {
   edges: Edge[];
 }
 
-interface Data {
+export interface RepoQuery {
   search: Search;
-}
-
-interface Result {
-  data: Data;
 }
 
 export interface Repo {

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Query, gql } from 'apollo-angular';
+import { RepoQuery } from '../types';
 
 @Injectable({
   providedIn: 'root',
 })
-export class reposGQL extends Query<any> {
+export class reposGQL extends Query<RepoQuery> {
   override document = gql`
     {
       search(query: "is:public", type: REPOSITORY, first: 10) {

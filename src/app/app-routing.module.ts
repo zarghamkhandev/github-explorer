@@ -3,11 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: 'repos',
     loadChildren: () =>
-      import('./pages/home/home.module').then((m) => m.HomeModule),
+      import('./pages/repos/repos.module').then((m) => m.ReposModule),
   },
-  { path: '**', redirectTo: 'home' },
+  { path: '**', redirectTo: 'repos' },
 ];
 
 @NgModule({
