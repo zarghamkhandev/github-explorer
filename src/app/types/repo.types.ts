@@ -10,6 +10,13 @@ export interface Repo {
   url: string;
 }
 
+export interface PageInfo {
+  startCursor: string;
+  hasPreviousPage: boolean;
+  hasNextPage: boolean;
+  endCursor: string;
+}
+
 export interface RepoQuery {
   search: Search;
 }
@@ -28,5 +35,7 @@ export interface LicenseInfo {
 }
 
 interface Search {
+  pageInfo: PageInfo;
+  repositoryCount: number;
   nodes: Repo[];
 }

@@ -1,6 +1,5 @@
-import { Update } from '@ngrx/entity';
 import { createAction, props } from '@ngrx/store';
-import { Repo } from '../../types';
+import { PageInfo, Repo } from '@types';
 
 export const loadAll = createAction('[Repos API] Load all repos');
 
@@ -14,12 +13,7 @@ export const setAll = createAction(
   props<{ repos: Repo[] }>()
 );
 
-// export const removeOne = createAction(
-//   '[Repos] Remove Repo',
-//   props<{ id: string }>()
-// );
-
-// export const updateOne = createAction(
-//   '[Repos] Update Repo',
-//   props<{ update: Update<Repo> }>()
-// );
+export const setPageInfoAndCount = createAction(
+  '[Repos Page] Set page info and page count',
+  props<{ pageInfo: PageInfo; pageCount: number }>()
+);

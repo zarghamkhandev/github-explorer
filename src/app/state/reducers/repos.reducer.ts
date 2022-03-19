@@ -1,28 +1,27 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
-import { Repo } from '../../types';
+import { PageInfo, Repo } from '@types';
 import { RepoActions } from '../actions';
 
 export interface State extends EntityState<Repo> {
   error: null | string;
+  pageCount: null | number;
+  pageInfo: null | PageInfo;
 }
 
 export const adapter: EntityAdapter<Repo> = createEntityAdapter<Repo>();
 
 export const reducer = createReducer<State>(
-  adapter.getInitialState({ error: null }),
+  adapter.getInitialState({ error: null, pageCount: null, pageInfo: null }),
   on(RepoActions.setAll, (state, { repos }) => {
     return adapter.setAll(repos, state);
   }),
   on(RepoActions.setError, (state, { error }) => {
     return { ...state, error };
+  }),
+  on(RepoActions.setPageInfoAndCount, (state, { pageCount, pageInfo }) => {
+    return { ...state, pageCount, pageInfo };
   })
-  // on(RepoActions.removeOne, (state, { id }) => {
-  //   return adapter.removeOne(id, state);
-  // }),
-  // on(RepoActions.updateOne, (state, { update }) => {
-  //   return adapter.updateOne(update, state);
-  // })
 );
 
 // get the selectors

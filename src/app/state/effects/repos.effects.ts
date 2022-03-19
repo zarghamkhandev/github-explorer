@@ -12,11 +12,11 @@ export class RepoEffects {
       ofType(RepoActions.loadAll),
       mergeMap(() =>
         this.reposService.getAll().pipe(
-          tap((val) => {
-            console.log(val);
-          }),
-          map((repos) => {
-            return RepoActions.setAll({ repos });
+          mergeMap(({ repos, pageCount, pageInfo }) => {
+            return [
+              RepoActions.setAll({ repos }),
+              RepoActions.setPageInfoAndCount({ pageInfo, pageCount }),
+            ];
           }),
           catchError(() => {
             return of(RepoActions.setError({ error: 'Unable to load repos' }));
