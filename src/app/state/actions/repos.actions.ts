@@ -13,7 +13,7 @@ export const setAll = createAction(
   props<{ repos: Repo[] }>()
 );
 
-export const setPageInfoAndCount = createAction(
-  '[Repos Page] Set page info and page count',
-  props<{ pageInfo: PageInfo; pageCount: number }>()
+export const setPageInfo = createAction(
+  '[Repos Page] Set page info.',
+  props<{ pageInfo: PageInfo }>()
 );

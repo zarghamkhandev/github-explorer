@@ -36,6 +36,23 @@
   padding-bottom: 100px;
 }
 
-.pagination-block {
+.cards-block {
+  min-height: 755px;
+}
+
+.footer-block {
   margin-top: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-icon {
+  color: var(--tui-base-06);
+  font-size: 40px;
+  margin: 0 20px;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--tui-support-02);
+  }
 }

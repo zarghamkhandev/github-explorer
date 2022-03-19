@@ -15,7 +15,7 @@ export class RepoEffects {
           mergeMap(({ repos, pageCount, pageInfo }) => {
             return [
               RepoActions.setAll({ repos }),
-              RepoActions.setPageInfoAndCount({ pageInfo, pageCount }),
+              RepoActions.setPageInfo({ pageInfo }),
             ];
           }),
           catchError(() => {

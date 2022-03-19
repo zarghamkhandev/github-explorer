@@ -19,8 +19,8 @@ export const reducer = createReducer<State>(
   on(RepoActions.setError, (state, { error }) => {
     return { ...state, error };
   }),
-  on(RepoActions.setPageInfoAndCount, (state, { pageCount, pageInfo }) => {
-    return { ...state, pageCount, pageInfo };
+  on(RepoActions.setPageInfo, (state, { pageInfo }) => {
+    return { ...state, pageInfo };
   })
 );
 

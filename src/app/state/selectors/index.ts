@@ -1,2 +1,2 @@
-import * as reposSelectors from './repos.selector';
+import * as reposSelectors from './repos.selectors';
 export { reposSelectors };

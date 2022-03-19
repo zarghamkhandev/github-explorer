@@ -14,6 +14,7 @@ import { reposSelectors } from '../../state/selectors';
 export class ReposComponent implements OnInit {
   error$ = this.store.select(reposSelectors.error);
   repos$ = this.store.select(reposSelectors.repos);
+  pageInfo$ = this.store.select(reposSelectors.pageInfo);
 
   constructor(private store: Store<GlobalState>) {}
 

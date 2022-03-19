@@ -16,7 +16,7 @@
 </tui-notification>
 
 <div class="container tui-space_top-5">
-  <div class="tui-row">
+  <div class="tui-row cards-block">
     <div class="tui-col_md-6" *ngFor="let repo of repos$ | async">
       <ngx-repo-card
         [title]="repo.name"
@@ -27,9 +27,8 @@
       ></ngx-repo-card>
     </div>
   </div>
-  <div class="tui-row pagination-block">
-    <div class="tui-col_md-12">
-      <tui-pagination [length]="10" [index]="2"></tui-pagination>
-    </div>
+  <div class="footer-block" *ngIf="pageInfo$ | async as pageInfo">
+    <tui-svg src="tuiIconChevronLeft" class="footer-icon"></tui-svg>
+    <tui-svg src="tuiIconChevronRight" class="footer-icon"></tui-svg>
   </div>
 </div>
