@@ -17,10 +17,8 @@
 
 <div class="container tui-space_top-5">
   <div class="tui-row">
-    <div class="tui-col_md-6">
+    <div class="tui-col_md-6" *ngFor="let repo of repos$ | async">
       <ngx-repo-card></ngx-repo-card>
     </div>
-
-    <div class="tui-col_md-6"></div>
   </div>
 </div>

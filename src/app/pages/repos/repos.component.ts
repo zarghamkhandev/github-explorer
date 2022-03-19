@@ -13,7 +13,9 @@ import { reposSelectors } from '../../state/selectors';
 })
 export class ReposComponent implements OnInit {
   error$ = this.store.select(reposSelectors.error);
-  constructor(private reposGQL: reposGQL, private store: Store<GlobalState>) {}
+  repos$ = this.store.select(reposSelectors.repos);
+
+  constructor(private store: Store<GlobalState>) {}
 
   ngOnInit(): void {
     this.store.dispatch(RepoActions.loadAll());
