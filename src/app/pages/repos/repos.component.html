@@ -1,1 +1,9 @@
 <ngx-header></ngx-header>
+
+<tui-notification
+  status="error"
+  class="notification"
+  *ngIf="error$ | async as error"
+>
+  {{ error }}
+</tui-notification>
