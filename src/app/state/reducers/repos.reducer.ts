@@ -3,14 +3,19 @@ import { createReducer, on } from '@ngrx/store';
 import { Repo } from '../../types';
 import { RepoActions } from '../actions';
 
-export interface State extends EntityState<Repo> {}
+export interface State extends EntityState<Repo> {
+  error: null | string;
+}
 
 export const adapter: EntityAdapter<Repo> = createEntityAdapter<Repo>();
 
-export const reducer = createReducer(
-  adapter.getInitialState(),
+export const reducer = createReducer<State>(
+  adapter.getInitialState({ error: null }),
   on(RepoActions.setAll, (state, { repos }) => {
     return adapter.setAll(repos, state);
+  }),
+  on(RepoActions.setError, (state, { error }) => {
+    return { ...state, error };
   })
   // on(RepoActions.removeOne, (state, { id }) => {
   //   return adapter.removeOne(id, state);

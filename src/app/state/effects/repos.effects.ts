@@ -7,7 +7,7 @@ import { RepoActions } from '../actions';
 
 @Injectable()
 export class RepoEffects {
-  loadMovies$ = createEffect(() =>
+  loadRepos$ = createEffect(() =>
     this.actions$.pipe(
       ofType(RepoActions.loadAll),
       mergeMap(() =>
@@ -15,8 +15,12 @@ export class RepoEffects {
           tap((val) => {
             console.log(val);
           }),
-          map((repos) => RepoActions.setAll({ repos })),
-          catchError(() => of({ type: '[Movies API] Movies Loaded Error' }))
+          map((repos) => {
+            return RepoActions.setAll({ repos });
+          }),
+          catchError(() =>
+            of(RepoActions.setError({ error: 'Unable to load repos' }))
+          )
         )
       )
     )
