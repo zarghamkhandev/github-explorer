@@ -1,30 +1,28 @@
 <tui-island class="card">
-  <div class="tui-row container">
-    <div class="tui-col_md-1">
-      <tui-svg src="tuiIconBookmark" class="icon"></tui-svg>
-    </div>
+  <div class="icon-col">
+    <tui-svg src="tuiIconBookmark" class="icon"></tui-svg>
+  </div>
 
-    <div class="tui-col_md-11 row">
-      <p class="title">{{ title }}</p>
-      <p class="description">
-        {{ description }}
-      </p>
-      <div class="footer">
-        <div class="footer-item" *ngIf="stargazerCount">
-          <tui-svg src="tuiIconStar" class="footer-item-icon"></tui-svg>
-          <p class="footer-item-text">{{ stargazerCount | shortNumber }}</p>
-        </div>
-        <div class="footer-item" *ngIf="language">
-          <tui-svg
-            src="circleFill"
-            class="footer-item-icon circle"
-            [style.color]="language.color"
-          ></tui-svg>
-          <p class="footer-item-text">{{ language.name }}</p>
-        </div>
-        <div class="footer-item" *ngIf="licenseInfo">
-          <p class="footer-item-text">{{ licenseInfo.spdxId }}</p>
-        </div>
+  <div class="main-col">
+    <p class="title">{{ title }}</p>
+    <p class="description">
+      {{ description }}
+    </p>
+    <div class="footer">
+      <div class="footer-item" *ngIf="stargazerCount">
+        <tui-svg src="tuiIconStar" class="footer-item-icon"></tui-svg>
+        <p class="footer-item-text">{{ stargazerCount | shortNumber }}</p>
+      </div>
+      <div class="footer-item" *ngIf="language">
+        <tui-svg
+          src="circleFill"
+          class="footer-item-icon circle"
+          [style.color]="language.color"
+        ></tui-svg>
+        <p class="footer-item-text">{{ language.name }}</p>
+      </div>
+      <div class="footer-item" *ngIf="licenseInfo">
+        <p class="footer-item-text">{{ licenseInfo.spdxId }}</p>
       </div>
     </div>
   </div>

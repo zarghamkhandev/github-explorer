@@ -6,32 +6,32 @@
   margin-bottom: 20px;
   box-shadow: 0px 5px 14px rgb(148, 163, 184, 0.15);
   min-height: 131px;
+  overflow: hidden;
 }
 
 .card {
   width: 100%;
+  display: flex;
 }
 
 :host:hover .card::before {
   border: 1px solid var(--tui-base-05);
 }
 
-.container {
-  height: 100%;
-}
-
-.row {
-  height: 100%;
+.main-col {
   display: flex;
   flex-direction: column;
+  flex: 1;
+  margin-left: 10px;
 }
 
 .title {
   font: var(--tui-font-heading-6);
   color: var(--tui-support-02);
-  text-overflow: ellipsis;
-  overflow: hidden;
+  display: flex;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .description {
@@ -47,6 +47,8 @@
 
 .icon {
   color: var(--tui-base-06);
+  width: 14px;
+  height: 14px;
 }
 
 .footer {
@@ -57,10 +59,9 @@
 .footer-item {
   display: flex;
   align-items: center;
-  width: 100px;
 
-  &:last-child {
-    flex: 1;
+  &:not(:first-child) {
+    margin-left: 20px;
   }
 }
 
@@ -79,4 +80,31 @@
   margin-left: 4px;
   font: var(--tui-font-text-s);
   color: var(--tui-base-07);
+}
+
+@media (max-width: 550px) {
+  .icon {
+    width: 8px;
+    height: 8px;
+    font-size: 8px;
+  }
+
+  .title {
+    font: var(--tui-font-text-m);
+  }
+  .description {
+    display: none;
+  }
+
+  .footer {
+    flex-direction: column;
+  }
+
+  .footer .footer-item {
+    margin: 2px 0px 2px 0px;
+  }
+
+  .footer-item-text {
+    font: var(--tui-font-text-xs);
+  }
 }
