@@ -20,6 +20,8 @@ import { HttpLink } from 'apollo-angular/http';
 import { DefaultOptions, InMemoryCache } from '@apollo/client/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthInterceptorProvider } from './auth/auth.interceptor';
+import { EffectsModule } from '@ngrx/effects';
+import { effects } from './state/effects';
 
 const defaultOptions: DefaultOptions = {
   watchQuery: {
@@ -46,7 +48,8 @@ const defaultOptions: DefaultOptions = {
     StoreModule.forRoot(reducers, {
       metaReducers,
     }),
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    StoreDevtoolsModule.instrument(),
+    EffectsModule.forRoot(effects),
   ],
   providers: [
     AuthInterceptorProvider,

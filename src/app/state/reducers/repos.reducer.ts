@@ -9,8 +9,8 @@ export const adapter: EntityAdapter<Repo> = createEntityAdapter<Repo>();
 
 export const reducer = createReducer(
   adapter.getInitialState(),
-  on(RepoActions.load, (state, { repos }) => {
-    return adapter.addMany(repos, state);
+  on(RepoActions.setAll, (state, { repos }) => {
+    return adapter.setAll(repos, state);
   })
   // on(RepoActions.removeOne, (state, { id }) => {
   //   return adapter.removeOne(id, state);

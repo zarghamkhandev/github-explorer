@@ -2,8 +2,10 @@ import { Update } from '@ngrx/entity';
 import { createAction, props } from '@ngrx/store';
 import { Repo } from '../../types';
 
-export const load = createAction(
-  '[Repos] Load all repos',
+export const loadAll = createAction('[Repos API] Load all repos');
+
+export const setAll = createAction(
+  '[Repos Page] Set all repos',
   props<{ repos: Repo[] }>()
 );
 
