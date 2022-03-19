@@ -5,6 +5,7 @@ import {
   TuiDialogModule,
   TuiNotificationsModule,
   TUI_SANITIZER,
+  TuiSvgModule,
 } from '@taiga-ui/core';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
