@@ -27,10 +27,6 @@ export interface LicenseInfo {
   spdxId: string;
 }
 
-interface Edge {
-  node: Repo;
-}
-
 interface Search {
-  edges: Edge[];
+  nodes: Repo[];
 }

@@ -9,16 +9,15 @@ import {
 } from '@taiga-ui/core';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
-import { environment } from '../environments/environment';
 import { reducers, metaReducers } from './state/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
+import { onError } from '@apollo/client/link/error';
 import { HttpLink } from 'apollo-angular/http';
-import { DefaultOptions, InMemoryCache } from '@apollo/client/core';
+import { ApolloLink, DefaultOptions, InMemoryCache } from '@apollo/client/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthInterceptorProvider } from './auth/auth.interceptor';
 import { EffectsModule } from '@ngrx/effects';
@@ -28,13 +27,23 @@ import { HeaderModule } from './components/header/header.module';
 const defaultOptions: DefaultOptions = {
   watchQuery: {
     fetchPolicy: 'no-cache',
-    errorPolicy: 'ignore',
   },
   query: {
     fetchPolicy: 'no-cache',
-    errorPolicy: 'all',
   },
 };
+
+// only to log errors to the console
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors)
+    graphQLErrors.map(({ message, locations, path }) =>
+      console.error(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+      )
+    );
+
+  if (networkError) console.error(`[Network error]: ${networkError}`);
+});
 
 @NgModule({
   declarations: [AppComponent],
@@ -62,9 +71,11 @@ const defaultOptions: DefaultOptions = {
       useFactory: (httpLink: HttpLink) => {
         return {
           cache: new InMemoryCache({}),
-          link: httpLink.create({
-            uri: 'https://api.github.com/graphql',
-          }),
+          link: errorLink.concat(
+            httpLink.create({
+              uri: 'https://api.github.com/graphql',
+            })
+          ),
           defaultOptions,
         };
       },

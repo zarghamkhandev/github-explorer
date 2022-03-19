@@ -18,9 +18,9 @@ export class RepoEffects {
           map((repos) => {
             return RepoActions.setAll({ repos });
           }),
-          catchError(() =>
-            of(RepoActions.setError({ error: 'Unable to load repos' }))
-          )
+          catchError(() => {
+            return of(RepoActions.setError({ error: 'Unable to load repos' }));
+          })
         )
       )
     )

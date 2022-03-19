@@ -9,8 +9,9 @@ export class ReposService {
 
   getAll(): Observable<Repo[]> {
     return this.reposGQL.fetch().pipe(
-      map((res) => res?.data?.search?.edges),
-      map((edges) => edges.map((edge) => edge.node))
+      map((res) => {
+        return res?.data?.search?.nodes;
+      })
     );
   }
 }
