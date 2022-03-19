@@ -1,0 +1,11 @@
+:host {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 10px;
+
+  &:hover {
+    border: 1px solid var(--tui-base-06);
+  }
+}

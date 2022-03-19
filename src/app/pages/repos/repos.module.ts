@@ -5,6 +5,8 @@ import { HomeRoutingModule } from './repos-routing.module';
 import { ReposComponent } from './repos.component';
 import { HeaderModule } from '../../components/header/header.module';
 import { TuiNotificationModule } from '@taiga-ui/core';
+import { TuiIslandModule } from '@taiga-ui/kit';
+import { RepoCardModule } from './components/repo-card/repo-card.module';
 
 @NgModule({
   declarations: [ReposComponent],
@@ -13,6 +15,8 @@ import { TuiNotificationModule } from '@taiga-ui/core';
     HomeRoutingModule,
     HeaderModule,
     TuiNotificationModule,
+    RepoCardModule,
   ],
+  exports: [],
 })
 export class ReposModule {}

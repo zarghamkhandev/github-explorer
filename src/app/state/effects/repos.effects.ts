@@ -16,7 +16,6 @@ export class RepoEffects {
             console.log(val);
           }),
           map((repos) => {
-            throw new Error();
             return RepoActions.setAll({ repos });
           }),
           catchError(() =>
