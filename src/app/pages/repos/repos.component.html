@@ -18,7 +18,13 @@
 <div class="container tui-space_top-5">
   <div class="tui-row">
     <div class="tui-col_md-6" *ngFor="let repo of repos$ | async">
-      <ngx-repo-card></ngx-repo-card>
+      <ngx-repo-card
+        [title]="repo.name"
+        [description]="repo.description"
+        [stargazerCount]="repo.stargazerCount"
+        [language]="repo.languages?.nodes?.[0] ?? null"
+        [licenseInfo]="repo.licenseInfo"
+      ></ngx-repo-card>
     </div>
   </div>
 </div>

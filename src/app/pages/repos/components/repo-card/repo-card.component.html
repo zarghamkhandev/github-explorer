@@ -1,28 +1,29 @@
-<tui-island class="container">
-  <div class="tui-row">
+<tui-island class="card">
+  <div class="tui-row container">
     <div class="tui-col_md-1">
       <tui-svg src="tuiIconBookmark" class="icon"></tui-svg>
     </div>
 
-    <div class="tui-col_md-11">
-      <p class="title">fabricjs/fabric.js</p>
+    <div class="tui-col_md-11 row">
+      <p class="title">{{ title }}</p>
       <p class="description">
-        Javascript Canvas Library, SVG-to-Canvas (& canvas-to-SVG) Parser
-        Javascript Canvas Library, SVG-to-Canvas (& canvas-to-SVG) Parse
-        Javascript Canvas Library, SVG-to-Canvas (& canvas-to-SVG) Parser
+        {{ description }}
       </p>
       <div class="footer">
-        <div class="footer-item">
+        <div class="footer-item" *ngIf="stargazerCount">
           <tui-svg src="tuiIconStar" class="footer-item-icon"></tui-svg>
-          <p class="footer-item-text">23.K</p>
+          <p class="footer-item-text">{{ stargazerCount | shortNumber }}</p>
         </div>
-        <div class="footer-item">
-          <tui-svg src="circleFill" class="footer-item-icon circle"></tui-svg>
-          <p class="footer-item-text">23.K</p>
+        <div class="footer-item" *ngIf="language">
+          <tui-svg
+            src="circleFill"
+            class="footer-item-icon circle"
+            [style.color]="language.color"
+          ></tui-svg>
+          <p class="footer-item-text">{{ language.name }}</p>
         </div>
-        <div class="footer-item">
-          <tui-svg src="tuiIconStar" class="footer-item-icon"></tui-svg>
-          <p class="footer-item-text">23.K</p>
+        <div class="footer-item" *ngIf="licenseInfo">
+          <p class="footer-item-text">{{ licenseInfo.spdxId }}</p>
         </div>
       </div>
     </div>
