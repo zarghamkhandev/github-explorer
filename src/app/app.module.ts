@@ -22,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthInterceptorProvider } from './auth/auth.interceptor';
 import { EffectsModule } from '@ngrx/effects';
 import { effects } from './state/effects';
+import { HeaderModule } from './components/header/header.module';
 
 const defaultOptions: DefaultOptions = {
   watchQuery: {
@@ -50,6 +51,7 @@ const defaultOptions: DefaultOptions = {
     }),
     StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot(effects),
+    HeaderModule,
   ],
   providers: [
     AuthInterceptorProvider,
