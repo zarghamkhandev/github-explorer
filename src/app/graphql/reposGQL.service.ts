@@ -11,7 +11,7 @@ export class reposGQL extends Query<RepoQuery, { after: string | null }> {
       search(
         query: "stars:>1 is:public"
         type: REPOSITORY
-        first: 10
+        first: 6
         after: $after
       ) {
         pageInfo {

@@ -32,12 +32,15 @@
   margin: 20px auto 0px auto;
 }
 
-.container {
-  padding-bottom: 100px;
+.cards-container {
+  min-height: 455px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0px -10px;
 }
-
-.cards-block {
-  min-height: 755px;
+.card {
+  width: calc(50% - 20px);
+  margin: 10px 10px;
 }
 
 .footer-block {
@@ -54,5 +57,12 @@
 
   &:hover {
     color: var(--tui-support-02);
+  }
+}
+
+@media (max-width: 740px) {
+  .card {
+    width: calc(100% - 20px);
+    margin: 10px 10px;
   }
 }

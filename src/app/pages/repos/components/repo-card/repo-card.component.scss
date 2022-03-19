@@ -81,30 +81,3 @@
   font: var(--tui-font-text-s);
   color: var(--tui-base-07);
 }
-
-@media (max-width: 550px) {
-  .icon {
-    width: 8px;
-    height: 8px;
-    font-size: 8px;
-  }
-
-  .title {
-    font: var(--tui-font-text-m);
-  }
-  .description {
-    display: none;
-  }
-
-  .footer {
-    flex-direction: column;
-  }
-
-  .footer .footer-item {
-    margin: 2px 0px 2px 0px;
-  }
-
-  .footer-item-text {
-    font: var(--tui-font-text-xs);
-  }
-}

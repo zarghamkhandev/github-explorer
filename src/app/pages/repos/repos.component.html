@@ -15,20 +15,19 @@
   {{ error }}
 </tui-notification>
 
-<div class="container tui-space_top-5">
-  <div class="tui-row cards-block">
-    <div class="tui-col_md-6" *ngFor="let repo of repos$ | async">
-      <ngx-repo-card
-        [title]="repo.name"
-        [description]="repo.description"
-        [stargazerCount]="repo.stargazerCount"
-        [language]="repo.languages?.nodes?.[0] ?? null"
-        [licenseInfo]="repo.licenseInfo"
-      ></ngx-repo-card>
-    </div>
-  </div>
-  <div class="footer-block" *ngIf="pageInfo$ | async as pageInfo">
-    <tui-svg src="tuiIconChevronLeft" class="footer-icon"></tui-svg>
-    <tui-svg src="tuiIconChevronRight" class="footer-icon"></tui-svg>
-  </div>
+<div class="cards-container">
+  <ngx-repo-card
+    class="card"
+    *ngFor="let repo of repos$ | async"
+    [title]="repo.name"
+    [description]="repo.description"
+    [stargazerCount]="repo.stargazerCount"
+    [language]="repo.languages?.nodes?.[0] ?? null"
+    [licenseInfo]="repo.licenseInfo"
+  ></ngx-repo-card>
+</div>
+
+<div class="footer-block" *ngIf="pageInfo$ | async as pageInfo">
+  <tui-svg src="tuiIconChevronLeft" class="footer-icon"></tui-svg>
+  <tui-svg src="tuiIconChevronRight" class="footer-icon"></tui-svg>
 </div>

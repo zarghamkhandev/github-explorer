@@ -12,7 +12,7 @@ export class RepoEffects {
       ofType(RepoActions.loadAll),
       mergeMap(() =>
         this.reposService.getAll().pipe(
-          mergeMap(({ repos, pageCount, pageInfo }) => {
+          mergeMap(({ repos, pageInfo }) => {
             return [
               RepoActions.setAll({ repos }),
               RepoActions.setPageInfo({ pageInfo }),

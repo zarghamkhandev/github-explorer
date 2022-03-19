@@ -9,17 +9,14 @@ export class ReposService {
 
   getAll(): Observable<{
     repos: Repo[];
-    pageCount: number;
     pageInfo: PageInfo;
   }> {
     return this.reposGQL.fetch({ after: null }).pipe(
       map((res) => {
-        const { nodes: repos, pageInfo, repositoryCount } = res?.data?.search;
-        // 1 page has 10 entities, so divide by 10 to get page count
-        const pageCount = Math.ceil(repositoryCount / 10);
+        const { nodes: repos, pageInfo } = res?.data?.search;
+
         return {
           repos,
-          pageCount,
           pageInfo,
         };
       })
