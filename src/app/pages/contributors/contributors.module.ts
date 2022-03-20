@@ -11,6 +11,7 @@ import {
 import { HeadingSectionModule } from '../../components/heading-section/heading-section.module';
 import { TuiIslandModule } from '@taiga-ui/kit';
 import { ContributorListItemModule } from './components/contributor-list-item/contributor-list-item.module';
+import { ContributorDetailsModule } from './components/contributor-details/contributor-details.module';
 
 @NgModule({
   declarations: [ContributorsComponent],
@@ -23,6 +24,7 @@ import { ContributorListItemModule } from './components/contributor-list-item/co
     TuiIslandModule,
     ContributorListItemModule,
     TuiScrollbarModule,
+    ContributorDetailsModule,
   ],
 })
 export class ContributorsModule {}

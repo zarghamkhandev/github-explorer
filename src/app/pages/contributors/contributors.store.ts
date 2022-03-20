@@ -77,7 +77,6 @@ export class ContributorsStore extends ComponentStore<State> {
             map((res) => res?.data?.nodes),
             tap({
               next: (contributors) => {
-                console.log(contributors);
                 this.setContributors(contributors);
                 this.setSelectedContributorId(contributors?.[0]?.id ?? null);
               },

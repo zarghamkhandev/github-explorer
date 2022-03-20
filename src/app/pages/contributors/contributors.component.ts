@@ -18,6 +18,7 @@ export class ContributorsComponent implements OnInit {
   loading$ = this.cstore.loading$;
   error$ = this.cstore.error$;
   contributors$ = this.cstore.contributors$;
+  selectedContributor$ = this.cstore.selectedContributor$;
 
   constructor(
     private route: ActivatedRoute,
