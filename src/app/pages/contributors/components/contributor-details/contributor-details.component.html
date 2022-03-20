@@ -25,5 +25,24 @@
         </button>
       </div>
     </div>
+    <p class="bio" *ngIf="contributor.bio">{{ contributor.bio }}</p>
+    <div class="vcard-block">
+      <div class="vcard" *ngIf="contributor.location">
+        <tui-svg src="tuiIconPin" class="vcard-icon"></tui-svg>
+        <p class="vcard-text">{{ contributor.location }}</p>
+      </div>
+      <div class="vcard" *ngIf="contributor.email">
+        <tui-svg src="tuiIconMail" class="vcard-icon"></tui-svg>
+        <p class="vcard-text">{{ contributor.email }}</p>
+      </div>
+      <div class="vcard" *ngIf="contributor.websiteUrl">
+        <tui-svg src="tuiIconLink" class="vcard-icon"></tui-svg>
+        <p class="vcard-text">{{ contributor.websiteUrl }}</p>
+      </div>
+      <div class="vcard" *ngIf="contributor.twitterUsername">
+        <tui-svg src="twitter" class="vcard-icon"></tui-svg>
+        <p class="vcard-text">@{{ contributor.twitterUsername }}</p>
+      </div>
+    </div>
   </ng-container>
 </tui-island>

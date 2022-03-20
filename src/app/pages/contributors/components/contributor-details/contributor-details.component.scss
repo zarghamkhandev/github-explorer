@@ -9,11 +9,12 @@
   margin-top: 20px;
   display: flex;
   flex-direction: column;
+  padding: 0px 20px;
 }
 
 .header-block {
   display: flex;
-  padding: 0px 20px;
+  margin-top: 20px;
 }
 
 .initials-block {
@@ -37,4 +38,31 @@
 .follow-block {
   display: flex;
   align-items: center;
+}
+
+.bio {
+  font: var(--tui-font-text-l);
+  color: var(--tui-text-02);
+  margin-top: 20px;
+}
+
+.vcard-block {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.vcard {
+  display: flex;
+  align-items: center;
+}
+
+.vcard-icon {
+  color: var(--tui-text-02);
+}
+
+.vcard-text {
+  font: var(--tui-font-text-s);
+  color: var(--tui-text-02);
+  margin-left: 10px;
 }
