@@ -1,4 +1,46 @@
+:host {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+}
+
 .notification {
   width: 300px;
   margin: 20px auto 0px auto;
+}
+
+.container {
+  min-height: 500px;
+  display: flex;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.title {
+  font: var(--tui-font-heading-4);
+  color: var(--tui-text-02);
+}
+
+.list-block {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-right: 30px;
+}
+
+.list-card {
+  flex: 1;
+  margin-top: 20px;
+}
+
+.about-block {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.about-card {
+  flex: 1;
+  margin-top: 20px;
 }
