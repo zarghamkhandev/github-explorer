@@ -11,6 +11,7 @@ import {
 } from '@taiga-ui/core';
 import { RepoCardModule } from './components/repo-card/repo-card.module';
 import { TuiPaginationModule } from '@taiga-ui/kit';
+import { HeadingSectionModule } from '../../components/heading-section/heading-section.module';
 
 @NgModule({
   declarations: [ReposComponent],
@@ -23,6 +24,7 @@ import { TuiPaginationModule } from '@taiga-ui/kit';
     TuiPaginationModule,
     TuiSvgModule,
     TuiLoaderModule,
+    HeadingSectionModule,
   ],
   exports: [],
 })

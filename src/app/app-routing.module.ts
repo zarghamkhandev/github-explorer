@@ -7,6 +7,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/repos/repos.module').then((m) => m.ReposModule),
   },
+  {
+    path: 'contributors/:repoId',
+    loadChildren: () =>
+      import('./pages/contributors/contributors.module').then(
+        (m) => m.ContributorsModule
+      ),
+  },
   { path: '**', redirectTo: 'repos' },
 ];
 

@@ -1,11 +1,7 @@
-<h6 class="tui-text_h3 heading">
-  A new way to discover <br />awesome github repositories
-</h6>
-
-<div class="separator-block">
-  <p class="tui-text_body-l">Top Repositories</p>
-  <div class="separator"></div>
-</div>
+<ngx-heading-section
+  heading="A new way to discover awesome github repositories"
+  separatorText="Top Repositories"
+></ngx-heading-section>
 
 <tui-notification
   status="error"
@@ -30,6 +26,7 @@
       [stargazerCount]="repo.stargazerCount"
       [language]="repo.languages?.nodes?.[0] ?? null"
       [licenseInfo]="repo.licenseInfo"
+      (click)="onRepoSelected(repo)"
     ></ngx-repo-card>
   </div>
 

@@ -3,7 +3,8 @@ import { Store } from '@ngrx/store';
 import { RepoActions } from '../../state/actions';
 import { GlobalState } from '../../state/reducers';
 import { reposSelectors } from '../../state/selectors';
-import { Pagination } from '@types';
+import { Pagination, Repo } from '@types';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-repos',
@@ -16,7 +17,7 @@ export class ReposComponent implements OnInit {
   repos$ = this.store.select(reposSelectors.paginatedRepos);
   pagination$ = this.store.select(reposSelectors.pagination);
   loading$ = this.store.select(reposSelectors.loading);
-  constructor(private store: Store<GlobalState>) {}
+  constructor(private store: Store<GlobalState>, private router: Router) {}
 
   ngOnInit(): void {
     this.store.dispatch(RepoActions.loadAll());
@@ -31,5 +32,9 @@ export class ReposComponent implements OnInit {
     this.store.dispatch(
       RepoActions.paginate({ currCursor: cursor, direction })
     );
+  }
+
+  onRepoSelected(repo: Repo) {
+    this.router.navigate([`/contributors/${repo.id}`]);
   }
 }
