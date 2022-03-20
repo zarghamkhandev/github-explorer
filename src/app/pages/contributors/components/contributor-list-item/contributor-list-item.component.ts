@@ -3,6 +3,7 @@ import {
   OnInit,
   ChangeDetectionStrategy,
   Input,
+  HostBinding,
 } from '@angular/core';
 
 @Component({
@@ -16,6 +17,12 @@ export class ContributorListItemComponent implements OnInit {
   @Input() index: number = 0;
   @Input() name: string = '';
   @Input() company: string | null = null;
+  @Input() isSelected: boolean = false;
+
+  @HostBinding('class.selected')
+  get selected() {
+    return this.isSelected;
+  }
   constructor() {}
 
   ngOnInit(): void {}

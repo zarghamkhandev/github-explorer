@@ -28,4 +28,8 @@ export class ContributorsComponent implements OnInit {
   ngOnInit(): void {
     this.cstore.getContributors(this.repoNameAndOwner$);
   }
+
+  onSelect(id: string) {
+    this.cstore.setSelectedContributorId(id);
+  }
 }

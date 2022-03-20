@@ -30,6 +30,10 @@
             [index]="i + 1"
             [name]="contributor.name ?? contributor.login"
             [company]="contributor.company"
+            [isSelected]="
+              (selectedContributor$ | async)?.id === contributor?.id
+            "
+            (click)="onSelect(contributor.id)"
           ></ngx-contributor-list-item>
         </tui-island>
       </tui-scrollbar>

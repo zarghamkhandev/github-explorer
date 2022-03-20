@@ -7,8 +7,12 @@
   cursor: pointer;
 
   &:hover {
-    background-color: var(--tui-base-03);
+    background-color: var(--tui-base-02);
   }
+}
+
+:host.selected {
+  background-color: var(--tui-base-02);
 }
 
 .number {
