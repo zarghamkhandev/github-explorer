@@ -1,4 +1,4 @@
-export interface Contributor {
+export interface RestContributor {
   login: string;
   id: number;
   node_id: string;
@@ -18,4 +18,27 @@ export interface Contributor {
   type: string;
   site_admin: boolean;
   contributions: number;
+}
+
+export interface Contributor {
+  id: string;
+  email: string;
+  name: string;
+  avatarUrl: string;
+  bio: string;
+  company: string;
+  followers: Followers;
+  isHireable: boolean;
+  location: string;
+  twitterUsername: string;
+  url: string;
+  websiteUrl: string;
+}
+
+interface Followers {
+  totalCount: number;
+}
+
+export interface ContributorQuery {
+  nodes: Contributor[];
 }

@@ -1,8 +1,6 @@
-import { Dictionary } from '@ngrx/entity';
 import { createSelector } from '@ngrx/store';
 import { GlobalState } from '../reducers';
 import * as fromRepos from '../reducers/repos.reducer';
-import { Repo } from '@types';
 
 export const selectReposState = (state: GlobalState) => state.repos;
 
@@ -40,7 +38,3 @@ export const entities = createSelector(
 
 export const selectRepo = (id: string) =>
   createSelector(entities, (entities) => entities[id]);
-
-function isDefined(repo: Repo | undefined): repo is Repo {
-  return repo !== undefined;
-}

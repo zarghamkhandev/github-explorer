@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { Contributor } from '@types';
-import { delay, Observable } from 'rxjs';
+import { RestContributor } from '@types';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +10,8 @@ import { delay, Observable } from 'rxjs';
 export class ContributorsService {
   constructor(private http: HttpClient) {}
 
-  getContributors(repoId: string): Observable<Contributor[]> {
-    return this.http.get<Contributor[]>(
+  getContributors(repoId: string): Observable<RestContributor[]> {
+    return this.http.get<RestContributor[]>(
       `${environment.endpoint}/${repoId}/contributors`
     );
   }

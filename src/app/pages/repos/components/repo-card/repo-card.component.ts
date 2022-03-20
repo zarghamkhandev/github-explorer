@@ -4,7 +4,7 @@ import {
   ChangeDetectionStrategy,
   Input,
 } from '@angular/core';
-import { Language, LicenseInfo, Repo } from '@types';
+import { Language, LicenseInfo } from '@types';
 
 @Component({
   selector: 'ngx-repo-card',

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map, tap } from 'rxjs';
+import { map } from 'rxjs';
 import { ContributorsStore } from './contributors.store';
 
 @Component({

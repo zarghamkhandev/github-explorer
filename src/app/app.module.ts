@@ -5,7 +5,6 @@ import {
   TuiDialogModule,
   TuiNotificationsModule,
   TUI_SANITIZER,
-  TuiSvgModule,
 } from '@taiga-ui/core';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -17,7 +16,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
 import { onError } from '@apollo/client/link/error';
 import { HttpLink } from 'apollo-angular/http';
-import { ApolloLink, DefaultOptions, InMemoryCache } from '@apollo/client/core';
+import { DefaultOptions, InMemoryCache } from '@apollo/client/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthInterceptorProvider } from './auth/auth.interceptor';
 import { EffectsModule } from '@ngrx/effects';

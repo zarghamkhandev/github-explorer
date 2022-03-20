@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { catchError, EMPTY, Observable, switchMap, tap } from 'rxjs';
+import { catchError, EMPTY, map, Observable, switchMap, tap } from 'rxjs';
 import { Contributor } from '@types';
 import { ContributorsService } from './contributors.service';
+import { contributorsGQL } from '../../graphql/contributorsGQL.service';
 
 interface State {
   contributors: Contributor[] | null;
@@ -29,7 +30,10 @@ export class ContributorsStore extends ComponentStore<State> {
     return { ...state, contributors };
   });
 
-  constructor(private contributorsService: ContributorsService) {
+  constructor(
+    private contributorsService: ContributorsService,
+    private contributorsGQL: contributorsGQL
+  ) {
     super({ contributors: null, loading: false, error: null });
   }
 
@@ -38,8 +42,14 @@ export class ContributorsStore extends ComponentStore<State> {
     (repoNameAndOwner$: Observable<string>) => {
       this.setLoading(true);
       return repoNameAndOwner$.pipe(
-        switchMap((id) =>
-          this.contributorsService.getContributors(id).pipe(
+        // we could not get contributors directly from graphql, so get list from rest api first
+        switchMap((id) => this.contributorsService.getContributors(id)),
+        // only take ids from rest api response
+        map((restContributors) => restContributors.map((item) => item.node_id)),
+        // query contributors from graphql api, with ids we have from rest
+        switchMap((ids) =>
+          this.contributorsGQL.fetch({ ids }).pipe(
+            map((res) => res?.data?.nodes),
             tap({
               next: (contributors) => {
                 console.log(contributors);
