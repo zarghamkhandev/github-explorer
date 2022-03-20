@@ -21,4 +21,8 @@ export class ContributorDetailsComponent implements OnInit {
   ngOnChanges() {
     console.log(this.contributor);
   }
+
+  onFollow() {
+    window.open(this.contributor?.url);
+  }
 }

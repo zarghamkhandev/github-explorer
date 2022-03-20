@@ -1,1 +1,29 @@
-<tui-island class="about-card"> </tui-island>
+<tui-island class="card">
+  <ng-container *ngIf="contributor">
+    <div class="header-block">
+      <tui-avatar
+        [text]="contributor.name ?? contributor.login"
+        size="xl"
+        [rounded]="true"
+        [avatarUrl]="contributor.avatarUrl"
+      ></tui-avatar>
+
+      <div class="initials-block">
+        <p class="name">{{ contributor.name }}</p>
+        <p class="company">{{ contributor.company }}</p>
+      </div>
+      <div class="follow-block">
+        <button
+          tuiButton
+          type="button"
+          size="m"
+          iconRight="tuiIconExternal"
+          class="follow-btn"
+          (click)="onFollow()"
+        >
+          Follow
+        </button>
+      </div>
+    </div>
+  </ng-container>
+</tui-island>

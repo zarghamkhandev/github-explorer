@@ -4,7 +4,37 @@
   width: 100%;
 }
 
-.about-card {
+.card {
   flex: 1;
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header-block {
+  display: flex;
+  padding: 0px 20px;
+}
+
+.initials-block {
+  flex: 1;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.name {
+  font: var(--tui-font-text-xl);
+  color: var(--tui-text-04);
+}
+
+.company {
+  font: var(--tui-font-text-m);
+  color: var(--tui-text-02);
+}
+
+.follow-block {
+  display: flex;
+  align-items: center;
 }
