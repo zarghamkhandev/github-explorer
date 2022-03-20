@@ -23,7 +23,8 @@ export interface RestContributor {
 export interface Contributor {
   id: string;
   email: string;
-  name: string;
+  name: string | null;
+  login: string;
   avatarUrl: string;
   bio: string;
   company: string;

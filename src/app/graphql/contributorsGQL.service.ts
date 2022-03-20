@@ -18,6 +18,7 @@ export class contributorsGQL extends Query<
           id
           email
           name
+          login
           avatarUrl
           bio
           company

@@ -1,1 +1,14 @@
-<p>contributor-list-item works!</p>
+<p class="number">{{ index }}</p>
+
+<tui-avatar
+  text="dmitry demensky"
+  size="m"
+  class="avatar"
+  [rounded]="true"
+  [avatarUrl]="avatarUrl"
+></tui-avatar>
+
+<div class="initials-block">
+  <p class="name">{{ name }}</p>
+  <p class="company">{{ company }}</p>
+</div>

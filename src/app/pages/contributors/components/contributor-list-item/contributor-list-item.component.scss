@@ -1,0 +1,39 @@
+:host {
+  display: flex;
+  width: 100%;
+  height: 80px;
+  align-items: center;
+  padding: 0px 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--tui-base-03);
+  }
+}
+
+.number {
+  font: var(--tui-font-text-m);
+  color: var(--tui-text-02);
+}
+
+.avatar {
+  margin-left: 20px;
+}
+
+.initials-block {
+  flex: 1;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.name {
+  font: var(--tui-font-text-l);
+  color: var(--tui-text-04);
+}
+
+.company {
+  font: var(--tui-font-text-s);
+  color: var(--tui-text-02);
+}

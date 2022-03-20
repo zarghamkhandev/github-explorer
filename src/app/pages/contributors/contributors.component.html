@@ -22,7 +22,17 @@
   <div class="container">
     <div class="list-block">
       <p class="title">All contributors</p>
-      <tui-island class="list-card"></tui-island>
+      <tui-scrollbar class="list-container">
+        <tui-island class="list-island">
+          <ngx-contributor-list-item
+            *ngFor="let contributor of contributors$ | async; let i = index"
+            [avatarUrl]="contributor.avatarUrl"
+            [index]="i + 1"
+            [name]="contributor.name ?? contributor.login"
+            [company]="contributor.company"
+          ></ngx-contributor-list-item>
+        </tui-island>
+      </tui-scrollbar>
     </div>
 
     <div class="about-block">
