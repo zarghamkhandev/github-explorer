@@ -1,15 +1,9 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { map, tap } from 'rxjs';
-import { reposGQL } from '../../graphql/reposGQL.service';
 import { RepoActions } from '../../state/actions';
 import { GlobalState } from '../../state/reducers';
 import { reposSelectors } from '../../state/selectors';
+import { Pagination } from '@types';
 
 @Component({
   selector: 'ngx-repos',
@@ -19,31 +13,23 @@ import { reposSelectors } from '../../state/selectors';
 })
 export class ReposComponent implements OnInit {
   error$ = this.store.select(reposSelectors.error);
-  repos$ = this.store.select(reposSelectors.repos);
-  pageInfo$ = this.store.select(reposSelectors.pageInfo);
+  repos$ = this.store.select(reposSelectors.paginatedRepos);
+  pagination$ = this.store.select(reposSelectors.pagination);
   loading$ = this.store.select(reposSelectors.loading);
-  constructor(
-    private store: Store<GlobalState>,
-    private cd: ChangeDetectorRef
-  ) {}
+  constructor(private store: Store<GlobalState>) {}
 
   ngOnInit(): void {
-    this.store.dispatch(RepoActions.loadAll({ cursor: null, direction: 1 }));
+    this.store.dispatch(RepoActions.loadAll());
   }
 
-  next(endCursor: string | null) {
-    if (!endCursor) return;
-
+  paginate(pagination: Pagination, direction: 1 | -1, repoCursor: string) {
+    const { cursor, remainingItems } = pagination;
+    if (remainingItems < 12) {
+      this.store.dispatch(RepoActions.loadMore({ pagination, repoCursor }));
+      return;
+    }
     this.store.dispatch(
-      RepoActions.loadAll({ cursor: endCursor, direction: 1 })
-    );
-  }
-
-  prev(startCursor: string | null) {
-    if (!startCursor) return;
-
-    this.store.dispatch(
-      RepoActions.loadAll({ cursor: startCursor, direction: -1 })
+      RepoActions.paginate({ currCursor: cursor, direction })
     );
   }
 }

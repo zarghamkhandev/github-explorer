@@ -1,20 +1,31 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
-import { PageInfo, Repo } from '@types';
+import { Pagination, Repo } from '@types';
 import { RepoActions } from '../actions';
 
 export interface State extends EntityState<Repo> {
   loading: boolean;
   error: null | string;
-  pageInfo: null | PageInfo;
+
+  pagination: null | Pagination;
 }
 
-export const adapter: EntityAdapter<Repo> = createEntityAdapter<Repo>();
+export const adapter: EntityAdapter<Repo> = createEntityAdapter<Repo>({
+  selectId: (repo: Repo) => repo.cursor as string,
+});
 
+const initialState = adapter.getInitialState({
+  error: null,
+  loading: true,
+  pagination: null,
+});
 export const reducer = createReducer<State>(
-  adapter.getInitialState({ error: null, pageInfo: null, loading: true }),
+  initialState,
   on(RepoActions.setAll, (state, { repos }) => {
     return adapter.setAll(repos, state);
+  }),
+  on(RepoActions.addMany, (state, { repos }) => {
+    return adapter.addMany(repos, state);
   }),
   on(RepoActions.setLoading, (state, { loading }) => {
     return { ...state, loading };
@@ -22,8 +33,19 @@ export const reducer = createReducer<State>(
   on(RepoActions.setError, (state, { error }) => {
     return { ...state, error };
   }),
-  on(RepoActions.setPageInfo, (state, { pageInfo }) => {
-    return { ...state, pageInfo };
+  on(RepoActions.setPagination, (state, { pagination }) => {
+    return { ...state, pagination };
+  }),
+  on(RepoActions.paginate, (state, { currCursor, direction }) => {
+    if (!state.pagination) return { ...state };
+    const nextCursor = currCursor + 6 * direction;
+    // cursor should not be less than 0
+    if (nextCursor < 0) return { ...state };
+    const remainingItems = state.ids.slice(nextCursor, -1).length + 1;
+    return {
+      ...state,
+      pagination: { ...state.pagination, cursor: nextCursor, remainingItems },
+    };
   })
 );
 

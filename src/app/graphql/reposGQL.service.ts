@@ -9,46 +9,37 @@ export class reposGQL extends Query<
   RepoQuery,
   {
     after: string | null;
-    before: string | null;
-    first: number | null;
-    last: number | null;
   }
 > {
   override document = gql`
-    query GetRepos($after: String, $before: String, $first: Int, $last: Int) {
+    query GetRepos($after: String) {
       search(
         query: "stars:>1 is:public"
         type: REPOSITORY
-        first: $first
         after: $after
-        last: $last
-        before: $before
+        first: 20
       ) {
-        pageInfo {
-          startCursor
-          hasPreviousPage
-          hasNextPage
-          endCursor
-        }
-        repositoryCount
-        nodes {
-          ... on Repository {
-            id
-            name
-            description
-            stargazerCount
-            languages(orderBy: { field: SIZE, direction: DESC }, first: 1) {
-              nodes {
-                name
-                color
+        edges {
+          cursor
+          node {
+            ... on Repository {
+              id
+              name
+              description
+              stargazerCount
+              languages(orderBy: { field: SIZE, direction: DESC }, first: 1) {
+                nodes {
+                  name
+                  color
+                }
               }
+              licenseInfo {
+                spdxId
+              }
+              pushedAt
+              updatedAt
+              url
             }
-            licenseInfo {
-              spdxId
-            }
-            pushedAt
-            updatedAt
-            url
           }
         }
       }

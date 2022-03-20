@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { mergeMap, catchError, tap, finalize } from 'rxjs/operators';
 import { ReposService } from '../../pages/repos/repos.service';
+import { Pagination } from '@types';
 import { RepoActions } from '../actions';
 import { GlobalState } from '../reducers';
 
@@ -15,12 +16,47 @@ export class RepoEffects {
       tap(() => {
         this.store.dispatch(RepoActions.setLoading({ loading: true }));
       }),
-      mergeMap(({ cursor, direction }) =>
-        this.reposService.getAll(cursor, direction).pipe(
-          mergeMap(({ repos, pageInfo }) => {
+      mergeMap(() =>
+        this.reposService.getAll(null).pipe(
+          mergeMap(({ repos }) => {
+            const pagination: Pagination = {
+              cursor: 0,
+              remainingItems: repos.length - 6,
+              direction: 1,
+            };
             return [
               RepoActions.setAll({ repos }),
-              RepoActions.setPageInfo({ pageInfo }),
+              RepoActions.setPagination({ pagination }),
+            ];
+          }),
+          finalize(() => {
+            this.store.dispatch(RepoActions.setLoading({ loading: false }));
+          }),
+          catchError(() => {
+            return of(RepoActions.setError({ error: 'Unable to load repos' }));
+          })
+        )
+      )
+    )
+  );
+
+  loadMoreRepos$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(RepoActions.loadMore),
+      tap(() => {
+        this.store.dispatch(RepoActions.setLoading({ loading: true }));
+      }),
+      mergeMap(({ pagination: old, repoCursor }) =>
+        this.reposService.getAll(repoCursor).pipe(
+          mergeMap(({ repos }) => {
+            const pagination: Pagination = {
+              remainingItems: old.remainingItems + repos.length - 6,
+              cursor: old.cursor + 6,
+              direction: 1,
+            };
+            return [
+              RepoActions.addMany({ repos }),
+              RepoActions.setPagination({ pagination }),
             ];
           }),
           finalize(() => {

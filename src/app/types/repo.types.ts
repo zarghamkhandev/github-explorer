@@ -8,13 +8,7 @@ export interface Repo {
   pushedAt: Date;
   updatedAt: Date;
   url: string;
-}
-
-export interface PageInfo {
-  startCursor: string;
-  hasPreviousPage: boolean;
-  hasNextPage: boolean;
-  endCursor: string;
+  cursor: string;
 }
 
 export interface RepoQuery {
@@ -35,7 +29,16 @@ export interface LicenseInfo {
 }
 
 interface Search {
-  pageInfo: PageInfo;
-  repositoryCount: number;
-  nodes: Repo[];
+  edges: Edge[];
+}
+
+interface Edge {
+  node: Repo;
+  cursor: string;
+}
+
+export interface Pagination {
+  cursor: number;
+  direction: 1 | -1;
+  remainingItems: number;
 }

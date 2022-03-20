@@ -1,9 +1,11 @@
 import { createAction, props } from '@ngrx/store';
-import { PageInfo, Repo } from '@types';
+import { Pagination, Repo } from '@types';
 
-export const loadAll = createAction(
-  '[Repos API] Load all repos',
-  props<{ cursor: string | null; direction: 1 | -1 }>()
+export const loadAll = createAction('[Repos API] Load all repos');
+
+export const loadMore = createAction(
+  '[Repos API] Load more repos',
+  props<{ pagination: Pagination; repoCursor: string }>()
 );
 
 export const setLoading = createAction(
@@ -20,7 +22,17 @@ export const setAll = createAction(
   props<{ repos: Repo[] }>()
 );
 
-export const setPageInfo = createAction(
-  '[Repos Page] Set page info.',
-  props<{ pageInfo: PageInfo }>()
+export const addMany = createAction(
+  '[Repos Page] Add many repos',
+  props<{ repos: Repo[] }>()
+);
+
+export const setPagination = createAction(
+  '[Repos Page] Set pagination',
+  props<{ pagination: Pagination }>()
+);
+
+export const paginate = createAction(
+  '[Repos Page] Paginate',
+  props<{ currCursor: number; direction: 1 | -1 }>()
 );

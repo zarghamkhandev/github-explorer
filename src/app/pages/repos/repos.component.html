@@ -19,11 +19,12 @@
   [showLoader]="(loading$ | async) ?? false"
   [overlay]="true"
   [inheritColor]="false"
+  *ngIf="repos$ | async as repos"
 >
   <div class="cards-container">
     <ngx-repo-card
       class="card"
-      *ngFor="let repo of repos$ | async"
+      *ngFor="let repo of repos"
       [title]="repo.name"
       [description]="repo.description"
       [stargazerCount]="repo.stargazerCount"
@@ -32,18 +33,16 @@
     ></ngx-repo-card>
   </div>
 
-  <div class="footer-block" *ngIf="pageInfo$ | async as pageInfo">
+  <div class="footer-block" *ngIf="pagination$ | async as pagination">
     <p
       class="footer-text"
-      (click)="prev(pageInfo.startCursor)"
-      [ngClass]="{ disabled: !pageInfo.hasPreviousPage }"
+      (click)="paginate(pagination, -1, repos.slice(-1)[0].cursor)"
     >
       Prev
     </p>
     <p
       class="footer-text"
-      (click)="next(pageInfo.endCursor)"
-      [ngClass]="{ disabled: !pageInfo.hasNextPage }"
+      (click)="paginate(pagination, 1, repos.slice(-1)[0].cursor)"
     >
       Next
     </p>
