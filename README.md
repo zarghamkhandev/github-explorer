@@ -2,7 +2,9 @@
 
 Tired of github's old and rusted UI to navigate through your favourite repositores ?
 
-Introducing brand new GitExplorer, where repo search is made awsome. 🎉 🎉 🎉
+Introducing brand new GitExplorer, where repo search is made awsome.
+
+# 🎉 🎉 🎉
 
 # Try it our yourself 👇
 
