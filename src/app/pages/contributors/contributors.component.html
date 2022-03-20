@@ -1,6 +1,9 @@
 <ngx-heading-section
-  heading="A new way to discover awesome github repositories"
-  separatorText="Top Repositories"
+  *ngIf="repoNameAndOwner$ | async as name"
+  [heading]="
+    'Explore top contributors from ' + name.split('/')[1] + ' repository'
+  "
+  [separatorText]="'Top repositories > ' + name.split('/')[1]"
 ></ngx-heading-section>
 
 <tui-notification

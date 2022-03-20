@@ -34,26 +34,28 @@ export class ContributorsStore extends ComponentStore<State> {
   }
 
   // an effect to api and fill store with outpus.
-  readonly getContributors = this.effect((repoId$: Observable<string>) => {
-    this.setLoading(true);
-    return repoId$.pipe(
-      switchMap((id) =>
-        this.contributorsService.getContributors(id).pipe(
-          tap({
-            next: (contributors) => {
-              console.log(contributors);
-              this.setContributors(contributors);
-            },
-            error: (e) => {
-              this.setError('Unable to load contributors'),
-                this.setLoading(false);
-            },
-            complete: () => this.setLoading(false),
-          }),
-          // we store error in our store and comunicate to user, so no need to bubble up.
-          catchError(() => EMPTY)
+  readonly getContributors = this.effect(
+    (repoNameAndOwner$: Observable<string>) => {
+      this.setLoading(true);
+      return repoNameAndOwner$.pipe(
+        switchMap((id) =>
+          this.contributorsService.getContributors(id).pipe(
+            tap({
+              next: (contributors) => {
+                console.log(contributors);
+                this.setContributors(contributors);
+              },
+              error: (e) => {
+                this.setError('Unable to load contributors'),
+                  this.setLoading(false);
+              },
+              complete: () => this.setLoading(false),
+            }),
+            // we store error in our store and comunicate to user, so no need to bubble up.
+            catchError(() => EMPTY)
+          )
         )
-      )
-    );
-  });
+      );
+    }
+  );
 }

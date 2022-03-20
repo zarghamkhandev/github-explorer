@@ -11,7 +11,9 @@ import { ContributorsStore } from './contributors.store';
   providers: [ContributorsStore],
 })
 export class ContributorsComponent implements OnInit {
-  repoId$ = this.route.queryParams.pipe(map((params) => params['repoId']));
+  repoNameAndOwner$ = this.route.queryParams.pipe(
+    map((params) => params['repoNameAndOwner'])
+  );
 
   loading$ = this.cstore.loading$;
   error$ = this.cstore.error$;
@@ -23,6 +25,6 @@ export class ContributorsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.cstore.getContributors(this.repoId$);
+    this.cstore.getContributors(this.repoNameAndOwner$);
   }
 }
