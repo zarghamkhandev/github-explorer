@@ -25,6 +25,13 @@ export class contributorsGQL extends Query<
           followers {
             totalCount
           }
+          following {
+            totalCount
+          }
+
+          repositories {
+            totalCount
+          }
           isHireable
           location
           twitterUsername

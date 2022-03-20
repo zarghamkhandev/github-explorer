@@ -18,10 +18,6 @@ export class ContributorDetailsComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  ngOnChanges() {
-    console.log(this.contributor);
-  }
-
   onFollow() {
     window.open(this.contributor?.url);
   }

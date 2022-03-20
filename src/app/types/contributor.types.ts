@@ -29,6 +29,8 @@ export interface Contributor {
   bio: string;
   company: string;
   followers: Followers;
+  following: Following;
+  repositories: Repositories;
   isHireable: boolean;
   location: string;
   twitterUsername: string;
@@ -36,7 +38,15 @@ export interface Contributor {
   websiteUrl: string;
 }
 
-interface Followers {
+export interface Followers {
+  totalCount: number;
+}
+
+export interface Following {
+  totalCount: number;
+}
+
+export interface Repositories {
   totalCount: number;
 }
 

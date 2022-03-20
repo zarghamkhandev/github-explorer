@@ -66,3 +66,28 @@
   color: var(--tui-text-02);
   margin-left: 10px;
 }
+
+.stats-block {
+  margin-top: auto;
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.stats-island {
+  width: fit-content;
+  min-width: 150px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-right: 30px;
+}
+
+.stats-title {
+  font: var(--tui-font-text-m);
+  color: var(--tui-text-02);
+}
+
+.stats-text {
+  font: var(--tui-font-heading-4);
+  color: var(--tui-text-04);
+}

@@ -21,7 +21,7 @@
           class="follow-btn"
           (click)="onFollow()"
         >
-          Follow
+          Github
         </button>
       </div>
     </div>
@@ -43,6 +43,36 @@
         <tui-svg src="twitter" class="vcard-icon"></tui-svg>
         <p class="vcard-text">@{{ contributor.twitterUsername }}</p>
       </div>
+    </div>
+
+    <div class="stats-block">
+      <tui-island
+        class="stats-island"
+        *ngIf="contributor.following?.totalCount"
+      >
+        <h3 class="stats-title">Following</h3>
+        <p class="stats-text">
+          {{ contributor.following.totalCount | shortNumber }}
+        </p>
+      </tui-island>
+      <tui-island
+        class="stats-island"
+        *ngIf="contributor.followers?.totalCount"
+      >
+        <h3 class="stats-title">Followers</h3>
+        <p class="stats-text">
+          {{ contributor.followers.totalCount | shortNumber }}
+        </p>
+      </tui-island>
+      <tui-island
+        class="stats-island"
+        *ngIf="contributor.repositories?.totalCount"
+      >
+        <h3 class="stats-title">Total repos</h3>
+        <p class="stats-text">
+          {{ contributor.repositories.totalCount | shortNumber }}
+        </p>
+      </tui-island>
     </div>
   </ng-container>
 </tui-island>
