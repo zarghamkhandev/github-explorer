@@ -7,6 +7,7 @@ import { contributorsGQL } from '../../graphql/contributorsGQL.service';
 
 interface State {
   contributors: Contributor[] | null;
+  selectedContributorId: string | null;
   error: string | null;
   loading: boolean;
 }
@@ -14,6 +15,19 @@ interface State {
 @Injectable()
 export class ContributorsStore extends ComponentStore<State> {
   contributors$ = this.select((state) => state.contributors);
+  selectedContributorId$ = this.select((state) => state.selectedContributorId);
+  selectedContributor$ = this.select(
+    this.contributors$,
+    this.selectedContributorId$,
+    (contributors, selectedId) => {
+      if (!selectedId || !contributors) return null;
+      const contributor = contributors.find(
+        (contributor) => contributor.id === selectedId
+      );
+      if (!contributor) return null;
+      return contributor;
+    }
+  );
   error$ = this.select((state) => state.error);
   loading$ = this.select((state) => state.loading);
 
@@ -29,12 +43,23 @@ export class ContributorsStore extends ComponentStore<State> {
     if (!contributors) return { ...state };
     return { ...state, contributors };
   });
+  setSelectedContributorId = this.updater(
+    (state, selectedContributorId: string) => ({
+      ...state,
+      selectedContributorId,
+    })
+  );
 
   constructor(
     private contributorsService: ContributorsService,
     private contributorsGQL: contributorsGQL
   ) {
-    super({ contributors: null, loading: false, error: null });
+    super({
+      contributors: null,
+      loading: false,
+      error: null,
+      selectedContributorId: null,
+    });
   }
 
   // an effect to api and fill store with outpus.
@@ -54,6 +79,7 @@ export class ContributorsStore extends ComponentStore<State> {
               next: (contributors) => {
                 console.log(contributors);
                 this.setContributors(contributors);
+                this.setSelectedContributorId(contributors?.[0]?.id ?? null);
               },
               error: (e) => {
                 this.setError('Unable to load contributors'),
