@@ -8,7 +8,7 @@ const routes: Routes = [
       import('./pages/repos/repos.module').then((m) => m.ReposModule),
   },
   {
-    path: 'contributors/:repoId',
+    path: 'contributors',
     loadChildren: () =>
       import('./pages/contributors/contributors.module').then(
         (m) => m.ContributorsModule

@@ -3,6 +3,17 @@
   separatorText="Top Repositories"
 ></ngx-heading-section>
 
-<tui-notification status="error" class="notification"> </tui-notification>
+<tui-notification
+  status="error"
+  class="notification"
+  *ngIf="error$ | async as error"
+>
+  {{ error }}
+</tui-notification>
 
-<tui-loader [overlay]="true" [inheritColor]="false"> </tui-loader>
+<tui-loader
+  [showLoader]="(loading$ | async)!"
+  [overlay]="true"
+  [inheritColor]="false"
+>
+</tui-loader>

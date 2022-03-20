@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   token: '',
+  endpoint: 'https://api.github.com/repos',
 };
 
 /*

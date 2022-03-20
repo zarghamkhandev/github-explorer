@@ -36,6 +36,7 @@ export class reposGQL extends Query<
               licenseInfo {
                 spdxId
               }
+              nameWithOwner
               pushedAt
               updatedAt
               url

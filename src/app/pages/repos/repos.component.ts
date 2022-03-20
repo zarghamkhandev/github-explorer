@@ -35,6 +35,10 @@ export class ReposComponent implements OnInit {
   }
 
   onRepoSelected(repo: Repo) {
-    this.router.navigate([`/contributors/${repo.id}`]);
+    this.router.navigate([`/contributors`], {
+      queryParams: {
+        repoId: repo.nameWithOwner,
+      },
+    });
   }
 }

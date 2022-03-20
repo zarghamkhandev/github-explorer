@@ -5,6 +5,7 @@ export interface Repo {
   stargazerCount: number;
   languages: Languages;
   licenseInfo: LicenseInfo;
+  nameWithOwner: string;
   pushedAt: Date;
   updatedAt: Date;
   url: string;
